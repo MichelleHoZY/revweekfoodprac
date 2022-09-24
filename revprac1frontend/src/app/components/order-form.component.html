@@ -1,0 +1,43 @@
+<div class="main">
+    <h1>Food pickup</h1>
+
+    <form [formGroup]="form" (ngSubmit)="processForm()">
+        <table>
+            <tr>
+                <td><label for="name">Name</label> </td>
+                <td><input type="text" formControlName="name"> </td>
+            </tr>
+            <tr>
+                <td><label for="mobile">Mobile</label> </td>
+                <td><input type="text" formControlName="mobile"> </td>
+            </tr>
+            <tr>
+                <td><label for="time">Pickup time</label> </td>
+                <td><select>
+                    <option value="lunch">Lunch</option>
+                    <option value="dinner">Dinner</option>
+                </select> </td>
+            </tr>
+        </table>
+        <button type="button" (click)="add()">Add order</button>
+        <div  *ngIf="orderArr.length > 0">
+            <table>
+                <thead>
+                    <th>Item </th>
+                    <th>Quantity</th>
+                </thead>
+                <tbody formArrayName="orderItems">
+                    <tr *ngFor="let t of orderArr.controls" [formGroup]="t">
+                        <td><input type="text" formControlName="item"> </td>
+                        <td><select formControlName="quantity">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select> </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit">Order</button>
+        </div>
+    </form>
+</div>

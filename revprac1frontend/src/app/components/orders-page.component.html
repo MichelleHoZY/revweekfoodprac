@@ -1,0 +1,41 @@
+<!-- <div>
+    <h2>Want to check your order?</h2>
+
+    <form>
+        <table>
+            <tr>
+                <td><label for="orderId">Order ID: </label> </td>
+                <td><input type="text"> </td>
+                <td><button type="submit">Check</button> </td>
+            </tr>
+        </table>
+    </form>
+</div> -->
+
+<div>
+    <h2>Your order: {{order.orderId}}</h2>
+
+    <table>
+        <tr>
+            <td>Name: </td>
+            <td>{{order.name}}</td>
+        </tr>
+        <tr>
+            <td>Mobile: </td>
+            <td>{{order.mobile}}</td>
+        </tr>
+        <tr>
+            <td>Pickup time: </td>
+            <td>{{order.time}}</td>
+        </tr>
+        <tr>
+            <td>Order Items: </td>
+        </tr>
+        <tr *ngFor="let t of order.orderItems">
+            <td>Item:</td>
+            <td>{{t.item}}</td>
+            <td>Quantity:</td>
+            <td>{{t.quantity}}</td>
+        </tr>
+    </table>
+</div>
