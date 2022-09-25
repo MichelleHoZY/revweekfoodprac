@@ -23,12 +23,16 @@ export class OrderService {
     }
 
     retrieveOrder(orderId: string): Promise<Order> {
-        const headers = new HttpHeaders()
-            .set('Content-Type', 'application/json')
-            .set('Accept', 'application/json')
+        // const headers = new HttpHeaders()
+        //     .set('Content-Type', 'application/json')
+        //     .set('Accept', 'application/json')
+
+        // return firstValueFrom(
+        //     this.http.post<Order>(SERVICE_URL_RETRIEVE_ORDER, orderId, {headers})
+        // )
 
         return firstValueFrom(
-            this.http.post<Order>(SERVICE_URL_RETRIEVE_ORDER, orderId, {headers})
+            this.http.get<Order>(`http://localhost:8080/order/retrieve/${orderId}`)
         )
     }
 }

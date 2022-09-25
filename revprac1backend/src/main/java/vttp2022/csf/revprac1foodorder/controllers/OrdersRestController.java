@@ -50,11 +50,38 @@ public class OrdersRestController {
         return ResponseEntity.status(HttpStatus.CREATED).body(jsonObject.build().toString());
     }
 
-    // @GetMapping(path="/retrieve/{id}")
     @PostMapping(path="/retrieve")
-    // public ResponseEntity<String> retrieveOrder(@PathVariable String id) {
-    public ResponseEntity<String> retrieveOrder(@RequestBody String id) throws IOException {
+    public ResponseEntity<String> retrieveOrderPost(@RequestBody String id) throws IOException {
         System.out.println(">>> Id: " + id);
+        Optional<Order> optOrder = orderSvc.retrieveCustomerOrder(id);
+
+        if (optOrder.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Order order = optOrder.get();
+
+        JsonObjectBuilder jsonObject = Json.createObjectBuilder();
+        jsonObject.add("name", order.getName());
+        jsonObject.add("mobile", order.getMobile());
+        jsonObject.add("time", order.getTime());
+        jsonObject.add("orderId", order.getOrderId());
+        
+        JsonArrayBuilder array = Json.createArrayBuilder();
+        for (OrderItem item : order.getItemList()) {
+            JsonObjectBuilder arrObj = Json.createObjectBuilder();
+            arrObj.add("item", item.getItem());
+            arrObj.add("quantity", item.getQuantity());
+            array.add(arrObj);
+        }
+
+        jsonObject.add("orderItems", array);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(jsonObject.build().toString());
+    }
+
+    @GetMapping(path="/retrieve/{id}")
+    public ResponseEntity<String> retrieveOrderGet(@PathVariable String id) throws IOException {
         Optional<Order> optOrder = orderSvc.retrieveCustomerOrder(id);
 
         if (optOrder.isEmpty()) {
