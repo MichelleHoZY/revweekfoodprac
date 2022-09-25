@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Order } from '../models';
 import { OrderService } from '../services/OrderService';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-orders-page',
@@ -18,7 +19,7 @@ export class OrdersPageComponent implements OnInit {
     orderItems: []
   }
 
-  constructor(private orderSvc: OrderService, private activatedRoute: ActivatedRoute) { }
+  constructor(private orderSvc: OrderService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.order.orderId = this.activatedRoute.snapshot.params['orderId']
@@ -30,6 +31,10 @@ export class OrdersPageComponent implements OnInit {
       .catch(error => {
         console.log(`>>> Error: ${error}`)
       })
+  }
+
+  homepage() {
+    this.router.navigate([''])
   }
 
 }

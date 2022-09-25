@@ -1,10 +1,16 @@
 package vttp2022.csf.revprac1foodorder.services;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.json.Json;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonReader;
 import vttp2022.csf.revprac1foodorder.models.Order;
 import vttp2022.csf.revprac1foodorder.repositories.OrdersRepo;
 
@@ -24,7 +30,7 @@ public class OrdersService {
         return Optional.empty();
     }
 
-    public Optional<Order> retrieveCustomerOrder(String orderId) {
+    public Optional<Order> retrieveCustomerOrder(String orderId) throws IOException {
         Order order = orderRepo.retrieveCustomerOrder(orderId);
         order.setItemList(orderRepo.retrieveCustomerOrderItems(orderId));
 

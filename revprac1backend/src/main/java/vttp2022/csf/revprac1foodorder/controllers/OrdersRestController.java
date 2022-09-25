@@ -1,5 +1,6 @@
 package vttp2022.csf.revprac1foodorder.controllers;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +50,11 @@ public class OrdersRestController {
         return ResponseEntity.status(HttpStatus.CREATED).body(jsonObject.build().toString());
     }
 
-    @GetMapping(path="/retrieve/{id}")
-    public ResponseEntity<String> retrieveOrder(@PathVariable String id) {
+    // @GetMapping(path="/retrieve/{id}")
+    @PostMapping(path="/retrieve")
+    // public ResponseEntity<String> retrieveOrder(@PathVariable String id) {
+    public ResponseEntity<String> retrieveOrder(@RequestBody String id) throws IOException {
+        System.out.println(">>> Id: " + id);
         Optional<Order> optOrder = orderSvc.retrieveCustomerOrder(id);
 
         if (optOrder.isEmpty()) {

@@ -12,7 +12,7 @@
     </form>
 </div> -->
 
-<div>
+<div class="main">
     <h2>Your order: {{order.orderId}}</h2>
 
     <table>
@@ -38,4 +38,5 @@
             <td>{{t.quantity}}</td>
         </tr>
     </table>
+    <button type="button" (click)="homepage()" class="btn btn-outline-info">Back to Home</button>
 </div>

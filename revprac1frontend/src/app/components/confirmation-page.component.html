@@ -1,36 +1,38 @@
-<div *ngIf="order != null">
-    <h3>This is your order:</h3>
-    <table>
-        <tr>
-            <td>Name: </td>
-            <td>{{order.name}} </td>
-        </tr>
-        <tr>
-            <td>Mobile: </td>
-            <td>{{order.mobile}} </td>
-        </tr>
-        <tr>
-            <td>Order ID: </td>
-            <td>{{order.orderId}} </td>
-        </tr>
-        <tr>
-            <td>Pickup time: </td>
-            <td>{{order.time}} </td>
-        </tr>
-    </table>
-    <table>
-        <thead>
-            <th>Item</th>
-            <th>Quantity</th>
-        </thead>
-        <tbody>
-            <tr *ngFor="let t of order.orderItems">
-                <td>{{t.item}}</td>
-                <td>{{t.quantity}} </td>
+<div class="main">
+    <div *ngIf="order != null">
+        <h3>This is your order:</h3>
+        <table>
+            <tr>
+                <td>Name: </td>
+                <td>{{order.name}} </td>
             </tr>
-        </tbody>
-    </table>
-</div>
-<div *ngIf="order == null">
-    <h2>There was an error while processing your order, please try again</h2>
+            <tr>
+                <td>Mobile: </td>
+                <td>{{order.mobile}} </td>
+            </tr>
+            <tr>
+                <td>Order ID: </td>
+                <td>{{order.orderId}} </td>
+            </tr>
+            <tr>
+                <td>Pickup time: </td>
+                <td>{{order.time}} </td>
+            </tr>
+        </table>
+        <table>
+            <thead>
+                <th>Item</th>
+                <th>Quantity</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let t of order.orderItems">
+                    <td>{{t.item}}</td>
+                    <td>{{t.quantity}} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="order == null">
+        <h2>There was an error while processing your order, please try again</h2>
+    </div>
 </div>

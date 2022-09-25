@@ -4,6 +4,7 @@ import { firstValueFrom, lastValueFrom } from "rxjs";
 import { Order } from "../models";
 
 const SERVICE_URL_SAVE_ORDER = "http://localhost:8080/order/newOrder"
+const SERVICE_URL_RETRIEVE_ORDER = "http://localhost:8080/order/retrieve"
  
 @Injectable()
 export class OrderService {
@@ -22,8 +23,12 @@ export class OrderService {
     }
 
     retrieveOrder(orderId: string): Promise<Order> {
+        const headers = new HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .set('Accept', 'application/json')
+
         return firstValueFrom(
-            this.http.get<Order>(`http://localhost:8080/order/retrieve/${orderId}`)
+            this.http.post<Order>(SERVICE_URL_RETRIEVE_ORDER, orderId, {headers})
         )
     }
 }
